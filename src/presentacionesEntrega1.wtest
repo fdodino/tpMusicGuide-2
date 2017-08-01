@@ -1,0 +1,73 @@
+import musicos.*
+import shows.*
+import fixtureEntrega2.*
+
+describe "presentaciones - entrega 1" {
+
+	var joaquin
+	var lucia
+	var presentacionLunaPark
+	var presentacionLaTrastienda
+
+	fixture {
+		//lucia = fixtureEntrega.lucia()
+		//joaquin = fixtureEntrega.joaquin()
+		joaquin = new MusicoDeGrupo(20, 5)
+		joaquin.grupo("Pimpinela") 
+		lucia = new VocalistaPopular(70, "familia") 
+		lucia.grupo("Pimpinela")
+		//presentacionLunaPark = fixtureEntrega.presentacionLunaPark()
+		//presentacionLaTrastienda = fixtureEntrega.presentacionLaTrastienda()
+		presentacionLunaPark = new Presentacion()
+		presentacionLunaPark.fecha(new Date(20, 4, 2017))
+		presentacionLunaPark.lugar(lunaPark)
+		presentacionLunaPark.agregarMusico(luisAlberto)
+		presentacionLunaPark.agregarMusico(joaquin)
+		presentacionLunaPark.agregarMusico(lucia)
+		presentacionLaTrastienda = new Presentacion()
+		presentacionLaTrastienda.fecha(new Date(15, 11, 2017))
+		presentacionLaTrastienda.lugar(laTrastienda)
+		presentacionLaTrastienda.agregarMusico(luisAlberto)
+		presentacionLaTrastienda.agregarMusico(joaquin)
+		presentacionLaTrastienda.agregarMusico(lucia)
+	}	
+
+	test "$ de Joaquín por presentación del Luna Park" {
+		assert.equals(50, joaquin.precioPorPresentacion(presentacionLunaPark))
+	}
+
+	test "$ de Joaquín por presentación de la Trastienda solo" {
+		presentacionLaTrastienda.eliminarMusicos()
+		presentacionLaTrastienda.agregarMusico(joaquin)
+		assert.equals(100, joaquin.precioPorPresentacion(presentacionLaTrastienda))
+	}
+	
+	test "capacidad de la Trastienda para el 05/08/2017" {
+		assert.equals(700, laTrastienda.capacidad(new Date(5, 8, 2017)))	
+	}
+
+	test "capacidad de la Trastienda para el 08/08/2017" {
+		assert.equals(400, laTrastienda.capacidad(new Date(8, 8, 2017)))	
+	}
+
+	test "$ de Lucía por presentación de la Trastienda" {
+		assert.equals(400, lucia.precioPorPresentacion(presentacionLaTrastienda))
+	}
+
+	test "$ de Luis Alberto por presentación del Luna Park" {
+		assert.equals(1000, luisAlberto.precioPorPresentacion(presentacionLunaPark))
+	}
+
+	test "$ de Luis Alberto por presentación de la Trastienda" {
+		assert.equals(1200, luisAlberto.precioPorPresentacion(presentacionLaTrastienda))
+	}
+
+	test "$ de la presentación del Luna Park" {
+		assert.equals(1550, presentacionLunaPark.costo())
+	}
+	
+	test "$ de la presentación de la Trastienda" {
+		assert.equals(1650, presentacionLaTrastienda.costo())
+	}
+	
+}

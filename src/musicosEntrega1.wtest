@@ -1,0 +1,75 @@
+import musicos.*
+import fixtureEntrega2.*
+
+describe "músicos - entrega 1" {
+
+	var joaquin
+	var lucia
+	var cisne
+	var laFamilia
+
+	fixture {
+		joaquin = fixtureEntrega.joaquin()
+		lucia = fixtureEntrega.lucia()
+		cisne = fixtureEntrega.cisne()
+		laFamilia = fixtureEntrega.laFamilia() 
+	}
+	
+	test "habilidad de Joaquín en grupo" {
+		assert.equals(25, joaquin.habilidad())
+	}
+	
+	test "habilidad de Joaquín como solista" {
+		joaquin.solista()
+		assert.equals(20, joaquin.habilidad())
+	}
+	
+	test "habilidad de Lucía en grupo" {
+		assert.equals(50, lucia.habilidad())
+	}
+
+	test "habilidad de Lucía como solista" {
+		lucia.solista()
+		assert.equals(70, lucia.habilidad())
+	}
+	
+	test "habilidad de Luis Alberto con la Fender" {
+		assert.equals(80, luisAlberto.habilidad())
+	}
+	
+	test "habilidad de Luis Alberto con la Gibson sana" {
+		luisAlberto.cambiarInstrumento(gibson)
+		assert.equals(100, luisAlberto.habilidad())
+	}
+	
+	test "habilidad de Luis Alberto con la Gibson rota" {
+		luisAlberto.cambiarInstrumento(gibson)
+		gibson.tratarMal()
+		assert.equals(40, luisAlberto.habilidad())
+	}
+
+	test "Joaquín no interpreta bien la canción la Familia" {
+		assert.notThat(joaquin.interpretaBien(laFamilia))
+	}
+
+	test "Joaquín interpreta bien la canción Cisne" {
+		assert.that(joaquin.interpretaBien(cisne))
+	}
+
+	test "Lucía interpreta bien la canción la Familia" {
+		assert.that(lucia.interpretaBien(laFamilia))
+	}
+
+	test "Lucía interpreta bien la canción Cisne" {
+		assert.notThat(lucia.interpretaBien(cisne))
+	}
+
+	test "Luis Alberto interpreta bien la canción Cisne" {
+		assert.that(luisAlberto.interpretaBien(cisne))
+	}
+
+	test "Luis Alberto interpreta bien la canción la Familia" {
+		assert.that(luisAlberto.interpretaBien(laFamilia))
+	}
+
+}

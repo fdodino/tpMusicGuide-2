@@ -1,0 +1,196 @@
+import canciones.*
+import musicos.*
+import presentaciones.*
+
+class AlbumBuilder {
+/*	
+	const album
+
+	constructor(titulo) {
+		album = new Album(titulo)
+	}
+	
+	method fecha(dia, mes, anio) {
+		album.fecha(new Date(dia, mes, anio))
+	}
+	
+	method agregarCancion(cancion) {
+		album.agregarCancion(cancion)
+		return self
+	}
+	
+	method unidadesLanzadas(unidades) {
+		album.unidadesLanzadas(unidades)
+		return self
+	} 
+	
+	method unidadesVendidas(unidades) {
+		album.unidadesVendidas(unidades)
+		return self
+	}
+	
+	method build() {
+		if (album.canciones().isEmpty()) {
+			throw new Exception("El album no puede estar vacío")
+		}
+		return album
+	}
+}
+
+describe "tests - entrega 1" {
+	
+	// Músicos
+	var joaquin = new MusicoDeGrupo(20, 5)
+	var lucia = new VocalistaPopular(70, "familia")
+	var soledad = new VocalistaPopular(55, "amor")
+	var kike = new MusicoDeGrupo(60, 20)
+
+	// Canciones
+	var cisne
+	var laFamilia
+	var eres
+	var corazonAmericano
+	
+	// Albumes	
+	var albumLaFamilia
+	var albumLaSole
+	
+	var presentacionLunaPark
+	var presentacionLaTrastienda
+
+	fixture {
+		// Canciones
+		cisne = new Cancion(312, "Hoy el viento se abrió quedó vacío el aire una vez más y el manantial brotó y nadie está aquí y puedo ver que solo estallan las hojas al brillar")
+		laFamilia = new Cancion(264, "Quiero brindar por mi gente sencilla, por el amor brindo por la familia")
+		eres = new Cancion(145, "Eres lo mejor que me pasó en la vida, no tengo duda, no habrá más nada después de ti. Eres lo que le dio brillo al día a día, y así será por siempre, no cambiará, hasta el final de mis días.")
+		corazonAmericano = new Cancion(154, "Canta corazón, canta más alto, que tu pena al fin se va marchando, el nuevo milenio ha de encontrarnos, junto corazón, como soñamos.")
+		
+		// Albumes
+		albumLaFamilia = new AlbumBuilder("La Familia")
+			.fecha(17, 6, 1992)
+			.agregarCancion(laFamilia)
+			.unidadesLanzadas(100000)
+			.unidadesVendidas(89000)
+			.build()
+	
+		albumLaSole = new Album("La Sole", new Date(4, 2, 2005))
+		albumLaSole.agregarCancion(eres)
+		albumLaSole.agregarCancion(corazonAmericano)
+		albumLaSole.unidadesLanzadas(200000)
+		albumLaSole.unidadesVendidas(130000)
+		
+		// Presentaciones
+		presentacionLunaPark = new Presentacion()
+		presentacionLunaPark.fecha(new Date(20, 4, 2017))
+		presentacionLunaPark.lugar(lunaPark)
+		presentacionLunaPark.agregarMusico(luisAlberto)
+		presentacionLunaPark.agregarMusico(joaquin)
+		presentacionLunaPark.agregarMusico(lucia)
+		presentacionLaTrastienda = new Presentacion()
+		presentacionLaTrastienda.fecha(new Date(15, 11, 2017))
+		presentacionLaTrastienda.lugar(laTrastienda)
+		presentacionLaTrastienda.agregarMusico(luisAlberto)
+		presentacionLaTrastienda.agregarMusico(joaquin)
+		presentacionLaTrastienda.agregarMusico(lucia)
+	}
+	
+	method inicializarMusicos() {
+		
+	}
+	
+	test "habilidad de Joaquín en grupo" {
+		assert.equals(25, joaquin.habilidad())
+	}
+	
+	test "habilidad de Joaquín como solista" {
+		joaquin.solista()
+		assert.equals(20, joaquin.habilidad())
+	}
+	
+	test "habilidad de Lucía en grupo" {
+		assert.equals(50, lucia.habilidad())
+	}
+
+	test "habilidad de Lucía como solista" {
+		lucia.solista()
+		assert.equals(70, lucia.habilidad())
+	}
+	
+	test "habilidad de Luis Alberto con la Fender" {
+		assert.equals(80, luisAlberto.habilidad())
+	}
+	
+	test "habilidad de Luis Alberto con la Gibson sana" {
+		luisAlberto.cambiarInstrumento(gibson)
+		assert.equals(100, luisAlberto.habilidad())
+	}
+	
+	test "habilidad de Luis Alberto con la Gibson rota" {
+		luisAlberto.cambiarInstrumento(gibson)
+		gibson.tratarMal()
+		assert.equals(40, luisAlberto.habilidad())
+	}
+
+	test "Joaquín no interpreta bien la canción la Familia" {
+		assert.notThat(joaquin.interpretaBien(laFamilia))
+	}
+
+	test "Joaquín interpreta bien la canción Cisne" {
+		assert.that(joaquin.interpretaBien(cisne))
+	}
+
+	test "Lucía interpreta bien la canción la Familia" {
+		assert.that(lucia.interpretaBien(laFamilia))
+	}
+
+	test "Lucía interpreta bien la canción Cisne" {
+		assert.notThat(lucia.interpretaBien(cisne))
+	}
+
+	test "Luis Alberto interpreta bien la canción Cisne" {
+		assert.that(luisAlberto.interpretaBien(cisne))
+	}
+
+	test "Luis Alberto interpreta bien la canción la Familia" {
+		assert.that(luisAlberto.interpretaBien(laFamilia))
+	}
+	
+	test "$ de Joaquín por presentación del Luna Park" {
+		assert.equals(50, joaquin.precioPorPresentacion(presentacionLunaPark))
+	}
+
+	test "$ de Joaquín por presentación de la Trastienda solo" {
+		presentacionLaTrastienda.eliminarMusicos()
+		presentacionLaTrastienda.agregarMusico(joaquin)
+		assert.equals(100, joaquin.precioPorPresentacion(presentacionLaTrastienda))
+	}
+	
+	test "capacidad de la Trastienda para el 05/08/2017" {
+		assert.equals(700, laTrastienda.capacidad(new Date(5, 8, 2017)))	
+	}
+
+	test "capacidad de la Trastienda para el 08/08/2017" {
+		assert.equals(400, laTrastienda.capacidad(new Date(8, 8, 2017)))	
+	}
+
+	test "$ de Lucía por presentación de la Trastienda" {
+		assert.equals(400, lucia.precioPorPresentacion(presentacionLaTrastienda))
+	}
+
+	test "$ de Luis Alberto por presentación del Luna Park" {
+		assert.equals(1000, luisAlberto.precioPorPresentacion(presentacionLunaPark))
+	}
+
+	test "$ de Luis Alberto por presentación de la Trastienda" {
+		assert.equals(1200, luisAlberto.precioPorPresentacion(presentacionLaTrastienda))
+	}
+
+	test "$ de la presentación del Luna Park" {
+		assert.equals(1550, presentacionLunaPark.costo())
+	}
+	
+	test "$ de la presentación de la Trastienda" {
+		assert.equals(1650, presentacionLaTrastienda.costo())
+	}
+	*/
+}

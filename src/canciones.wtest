@@ -1,0 +1,24 @@
+import fixtureEntrega2.*
+import canciones.*
+
+describe "canciones - entrega 2" {
+	
+	// Canciones
+	var almaDeDiamante
+	var crisantemo
+	
+	fixture {
+		// Canciones
+		almaDeDiamante = fixtureEntrega.almaDeDiamante()
+		crisantemo = fixtureEntrega.crisantemo()
+	}
+	 
+	test "crisantemo es corta" {
+		assert.that(crisantemo.esCorta())
+	}
+	
+	test "alma de diamante no es corta" {
+		assert.notThat(almaDeDiamante.esCorta())
+	}
+	
+}
