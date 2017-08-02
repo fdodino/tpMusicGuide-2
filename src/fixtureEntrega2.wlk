@@ -1,6 +1,4 @@
-import canciones.*
 import musicos.*
-import shows.*
 
 object fixtureEntrega {
  
@@ -26,8 +24,8 @@ object fixtureEntrega {
 
 	// Presentaciones
  	const presentacionLunaPark = new Presentacion()
-	const presentacionLaTrastienda = new Presentacion()
-
+ 	const presentacionLaTrastienda = new Presentacion()
+ 
 	method laFamilia() = laFamilia
 	method eres() = eres
 	method corazonAmericano() = corazonAmericano
