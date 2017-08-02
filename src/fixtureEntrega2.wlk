@@ -1,6 +1,15 @@
-import canciones.*
-import musicos.*
-import shows.*
+import canciones.Album
+import canciones.AlbumBuilder
+import canciones.Cancion
+import musicos.fender
+import musicos.gibson
+import musicos.luisAlberto
+import musicos.Musico
+import musicos.MusicoDeGrupo
+import musicos.VocalistaPopular
+import shows.laTrastienda
+import shows.lunaPark
+import shows.Presentacion
 
 object fixtureEntrega {
  
