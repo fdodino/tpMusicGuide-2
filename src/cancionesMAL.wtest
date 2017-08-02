@@ -1,9 +1,17 @@
-import canciones.*
-import musicos.*
-import presentaciones.*
+import canciones.Album
+import canciones.AlbumBuilder
+import canciones.Cancion
+import musicos.fender
+import musicos.gibson
+import musicos.luisAlberto
+import musicos.Musico
+import musicos.MusicoDeGrupo
+import musicos.VocalistaPopular
+import shows.laTrastienda
+import shows.lunaPark
+import shows.Presentacion
 
 class AlbumBuilder {
-/*	
 	const album
 
 	constructor(titulo) {
@@ -73,11 +81,13 @@ describe "tests - entrega 1" {
 			.unidadesVendidas(89000)
 			.build()
 	
-		albumLaSole = new Album("La Sole", new Date(4, 2, 2005))
-		albumLaSole.agregarCancion(eres)
-		albumLaSole.agregarCancion(corazonAmericano)
-		albumLaSole.unidadesLanzadas(200000)
-		albumLaSole.unidadesVendidas(130000)
+		albumLaSole = new AlbumBuilder("La Sole")
+			.fecha(4, 2, 2005)
+			.agregarCancion(eres)
+			.agregarCancion(corazonAmericano)
+			.unidadesLanzadas(200000)
+			.unidadesVendidas(130000)
+			.build()
 		
 		// Presentaciones
 		presentacionLunaPark = new Presentacion()
@@ -192,5 +202,5 @@ describe "tests - entrega 1" {
 	test "$ de la presentación de la Trastienda" {
 		assert.equals(1650, presentacionLaTrastienda.costo())
 	}
-	*/
+
 }
